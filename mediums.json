@@ -19,6 +19,9 @@
         "name": "Wood Burning"
     },
     {
+        "name": "Gel Pens"
+    },
+    {
         "name": "Gouache"
     },
     {
@@ -60,5 +63,11 @@
             "3",
             "2"
         ]
+    },
+    {
+        "name": "Airbrush"
+    },
+    {
+        "name": "Spray Paint"
     }
 ]
