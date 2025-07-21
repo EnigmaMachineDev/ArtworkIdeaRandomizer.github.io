@@ -27,6 +27,11 @@
             color: #0c0; /* Darker green for heading */
             margin-bottom: 20px;
         }
+        h2 {
+            color: #0c0; /* Darker green for subheadings */
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
         button {
             background-color: #0a0; /* Green button */
             color: #ddd; /* Slightly darker white text on button */
@@ -41,11 +46,19 @@
         button:hover {
             background-color: #070; /* Darker green on hover */
         }
-        #mediumDisplay {
-            margin-top: 30px;
+        #mediumDisplay,
+        #surfaceSizeDisplay {
+            margin-top: 10px;
             font-size: 24px;
             font-weight: bold;
-            color: #0c0; /* Darker green for displayed medium */
+            color: #0c0; /* Darker green for displayed medium and surface size */
+        }
+        .result-section {
+            border: 1px solid #070; /* Green border */
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            background-color: #2a2a2a; /* Slightly darker background for sections */
         }
     </style>
 </head>
@@ -53,11 +66,15 @@
     <div class="container">
         <h1>Generate a Random Art Medium</h1>
         <button id="generateButton">Generate Medium</button>
-        <h2>Medium</h2>
-        <div id="mediumDisplay">Click "Generate Medium" to get an idea!</div>
+        <div class="result-section">
+            <h2>Medium</h2>
+            <div id="mediumDisplay">Click "Generate Medium" to get an idea!</div>
+        </div>
 
-        <h2>Surface Size</h2>
-        <div id="surfaceSizeDisplay">Click "Generate Medium" to get an idea!</div>
+        <div class="result-section">
+            <h2>Surface Size</h2>
+            <div id="surfaceSizeDisplay">Click "Generate Medium" to get an idea!</div>
+        </div>
     </div>
 
     <script>
