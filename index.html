@@ -57,33 +57,70 @@
     </div>
 
     <script>
-        const mediums = [
-            "Oil Painting",
-            "Acrylic Painting",
-            "Watercolor",
-            "Charcoal Drawing",
-            "Pencil Sketch",
-            "Ink Drawing",
-            "Pastel Drawing",
-            "Sculpture (Clay)",
-            "Sculpture (Wood)",
-            "Sculpture (Metal)",
-            "Digital Painting",
-            "Photography",
-            "Collage",
-            "Printmaking (Linocut)",
-            "Printmaking (Etching)",
-            "Mixed Media",
-            "Textile Art",
-            "Ceramics",
-            "Gouache",
-            "Airbrush",
-            "Assemblage"
-        ];
+        let mediums = [];
+
+        // Fetch mediums from mediums.json
+        fetch('mediums.json')
+            .then(response => response.json())
+            .then(data => {
+                mediums = data;
+            })
+            .catch(error => {
+                console.error('Error loading mediums:', error);
+                document.getElementById('mediumDisplay').textContent = 'Error loading mediums.';
+            });
 
         document.getElementById('generateButton').addEventListener('click', () => {
-            const randomIndex = Math.floor(Math.random() * mediums.length);
-            document.getElementById('mediumDisplay').textContent = mediums[randomIndex];
+            if (mediums.length === 0) {
+                document.getElementById('mediumDisplay').textContent = 'Loading mediums... please wait.';
+                return;
+            }
+
+            const rollMedium = (excludeMixedMedia = false) => {
+                let availableMediums = mediums;
+                if (excludeMixedMedia) {
+                    availableMediums = mediums.filter(m => m.name !== "Mixed Media");
+                }
+                const randomIndex = Math.floor(Math.random() * availableMediums.length);
+                const medium = availableMediums[randomIndex];
+                let text = medium.name;
+                if (medium.options && medium.options.length > 0) {
+                    const randomOptionIndex = Math.floor(Math.random() * medium.options.length);
+                    text += ` - ${medium.options[randomOptionIndex]}`;
+                }
+                return text;
+            };
+
+            let displayText = "";
+            const selectedMedium = mediums[Math.floor(Math.random() * mediums.length)];
+
+            if (selectedMedium.name === "Mixed Media") {
+                const randomOptionIndex = Math.floor(Math.random() * selectedMedium.options.length);
+                const selectedOption = selectedMedium.options[randomOptionIndex];
+
+                if (selectedOption === "Free For All") {
+                    displayText = "Mixed Media";
+                } else {
+                    const numRolls = parseInt(selectedOption);
+                    if (!isNaN(numRolls) && numRolls > 0) {
+                        let rolledMedia = [];
+                        for (let i = 0; i < numRolls; i++) {
+                            rolledMedia.push(rollMedium(true)); // Exclude Mixed Media for sub-rolls
+                        }
+                        displayText = `Mixed Media - ${rolledMedia.join(", ")}`;
+                    } else {
+                        displayText = `Mixed Media - ${selectedOption}`; // Fallback for unexpected options
+                    }
+                }
+            } else {
+                displayText = selectedMedium.name;
+                if (selectedMedium.options && selectedMedium.options.length > 0) {
+                    const randomOptionIndex = Math.floor(Math.random() * selectedMedium.options.length);
+                    displayText += ` - ${selectedMedium.options[randomOptionIndex]}`;
+                }
+            }
+
+            document.getElementById('mediumDisplay').textContent = displayText;
         });
     </script>
 </body>

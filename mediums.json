@@ -30,20 +30,20 @@
     {
         "name": "Encaustic Wax",
         "options": [
-            "beeswax",
-            "crayon wax"
+            "Beeswax",
+            "Crayon Wax"
         ]
     },
     {
         "name": "Ink Pens",
         "options": [
-            "fountain pen",
-            "gel pens",
-            "brush pens",
-            "fineliner pens",
-            "ballpoint pens",
-            "rollerball pens",
-            "technical pens"
+            "Fountain Pen",
+            "Gel Pens",
+            "Brush Pens",
+            "Fineliner Pens",
+            "Ballpoint Pens",
+            "Rollerball Pens",
+            "Technical Pens"
         ]
     },
     {
@@ -58,7 +58,7 @@
     {
         "name": "Mixed Media",
         "options": [
-            "free for all",
+            "All",
             "4",
             "3",
             "2"
